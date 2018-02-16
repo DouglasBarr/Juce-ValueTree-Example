@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+#Juce stuff
+/Builds
+
+#OS stuff
+.DS_Store
