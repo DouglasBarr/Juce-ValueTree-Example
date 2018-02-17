@@ -14,7 +14,7 @@
 
 /** Displays a colour entry in a ValueTree.
  *
- *  Shows a box filled with the given colour, it's name and it's hex colour code.
+ *  Shows a box filled with the given colour, its name and its hex colour code.
  */
 
 class ColourPalleteDisplay: public Component, public ValueTree::Listener

@@ -20,7 +20,7 @@
     One of the components makes changes to the ValueTree internally (the ColourEditor), and the other is a 
     ValueTree::Listener which gets updated when a change is made.
  
-    The ValueTree colourDataFromXML looks like it gets passed around by value, but it's operator= is overriden so
+    The ValueTree colourDataFromXML looks like it gets passed around by value, but its operator= is overriden so
     that the new ValueTree points at the node that is passed in.
 */
 

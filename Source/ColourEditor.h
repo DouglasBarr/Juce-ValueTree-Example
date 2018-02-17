@@ -32,7 +32,7 @@ public:
     
     void resized() override;
     
-    /** The ColourSelector object uses the ChangeBroadcaster/Listener pattern to provide access to it's data.
+    /** The ColourSelector object uses the ChangeBroadcaster/Listener pattern to provide access to its data.
      */
     void changeListenerCallback (ChangeBroadcaster* source) override;
     
