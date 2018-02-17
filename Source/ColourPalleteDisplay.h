@@ -13,7 +13,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 
 
-class ColourPalleteDisplay: public Component
+class ColourPalleteDisplay: public Component, public ValueTree::Listener
 {
 public:
     
@@ -23,10 +23,30 @@ public:
     
     void pickNewColourFromValueTree (int childIndex);
     
+    //=================================
+    
+    void valueTreePropertyChanged (ValueTree& treeWhosePropertyHasChanged,
+                                   const Identifier& property) override;
+
+    void valueTreeChildAdded (ValueTree& parentTree,
+                              ValueTree& childWhichHasBeenAdded) override;
+    
+    void valueTreeChildRemoved (ValueTree& parentTree,
+                                ValueTree& childWhichHasBeenRemoved,
+                                int indexFromWhichChildWasRemoved) override;
+    
+    void valueTreeChildOrderChanged (ValueTree& parentTreeWhoseChildrenHaveMoved,
+                                     int oldIndex,
+                                     int newIndex) override;
+    
+    void valueTreeParentChanged (ValueTree& treeWhoseParentHasChanged) override;
+    
+    //=================================
+    
 private:
     
     ValueTree colourCodesAndNames;
-    
+        
     Colour fillColour { Colours::antiquewhite };
     String colourName { "Antique White" };
     String colourCode { "#faebd7" };

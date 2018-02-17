@@ -44,8 +44,11 @@ private:
     String colourCode { "0xfffaebd7" };
     
     ColourSelector colourSelector;
+    
     TextEditor colourNameInput;
+    
     TextButton submitButton { "Submit" };
+    TextButton cancelButton { "Cancel" };
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ColourEditor)
 };

@@ -30,8 +30,10 @@ colourCodesAndNames(tree)
     addAndMakeVisible(colourNameInput);
     
     submitButton.addListener(this);
+    cancelButton.addListener(this);
     
     addAndMakeVisible(submitButton);
+    addAndMakeVisible(cancelButton);
 }
 
 void ColourEditor::showEditorForColourEntry (int index)
@@ -70,20 +72,22 @@ void ColourEditor::changeListenerCallback (ChangeBroadcaster* source)
 
 void ColourEditor::buttonClicked (Button* b)
 {
-    colourName = colourNameInput.getText();
+    if (b == &submitButton)
+    {
+        auto colourEntryToEdit = colourCodesAndNames.getChild(valueTreeEntryActiveOnOpen);
+        
+        if (!colourEntryToEdit.isValid())
+            return;
+        
+        colourName = colourNameInput.getText();
+        
+        if (colourName.isNotEmpty())
+            colourEntryToEdit.setProperty("ColourName", colourName, nullptr);
+        
+        colourEntryToEdit.setProperty("ColourCode", "0x" + colourCode, nullptr);
+    }
     
-    if (colourName.isEmpty())
-        return;
-    
-    auto colourEntryToEdit = colourCodesAndNames.getChild(valueTreeEntryActiveOnOpen);
-    
-    if (!colourEntryToEdit.isValid())
-        return;
-    
-    colourEntryToEdit.setProperty("ColourCode", "0x" + colourCode, nullptr);
-    colourEntryToEdit.setProperty("ColourName", colourName, nullptr);
-    
-    setVisible(false);
+    dismissColourEditor(); // triggered on successful colour value editing or when the cancel button is pressed
 }
 
 void ColourEditor::paint (Graphics& g)
@@ -98,21 +102,13 @@ void  ColourEditor::resized()
 {
     auto bounds = getLocalBounds().withSizeKeepingCentre(300, 400);
     
-    auto bottomBar = bounds.removeFromBottom(bounds.proportionOfHeight(0.2f));
+    auto buttonArea = bounds.removeFromBottom(40).reduced(20, 5);
+    auto textEditorArea = bounds.removeFromBottom(40).reduced(28, 5);
     
-    const int sideMargin = bottomBar.proportionOfWidth(0.05f);
+    colourSelector.setBounds(bounds.reduced(20));
     
-    bottomBar.removeFromLeft(sideMargin);
-    bottomBar.removeFromRight(sideMargin);
+    colourNameInput.setBounds(textEditorArea);
     
-    if (bottomBar.getHeight() > 25)
-        bottomBar = bottomBar.withSizeKeepingCentre(bottomBar.getWidth(), 25);
-    
-    const int textEditorWidth = bounds.proportionOfWidth(0.6f);
-    const int submitButtonWidth = bounds.proportionOfWidth(0.2f);
-    
-    colourNameInput.setBounds(bottomBar.removeFromLeft(textEditorWidth));
-    submitButton.setBounds(bottomBar.removeFromRight(submitButtonWidth));
-    colourSelector.setBounds(bounds);
-    
+    submitButton.setBounds(buttonArea.removeFromLeft(buttonArea.proportionOfWidth(0.5f)).reduced(8, 0));
+    cancelButton.setBounds(buttonArea.reduced(8, 0));
 }

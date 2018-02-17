@@ -14,6 +14,7 @@
 ColourPalleteDisplay::ColourPalleteDisplay (ValueTree tree): colourCodesAndNames(tree)
 {
     pickNewColourFromValueTree (0);
+    colourCodesAndNames.addListener(this);
 }
 
 void ColourPalleteDisplay::paint (Graphics& g)
@@ -49,4 +50,36 @@ void ColourPalleteDisplay::pickNewColourFromValueTree (int childIndex)
     colourCode = "#" + fullColourCode.substring(4);
     
     fillColour = Colour::fromString(fullColourCode);
+}
+
+void ColourPalleteDisplay::valueTreePropertyChanged (ValueTree& treeWhosePropertyHasChanged,
+                                                     const Identifier& property)
+{
+    pickNewColourFromValueTree(colourCodesAndNames.indexOf(treeWhosePropertyHasChanged));
+    repaint();
+}
+
+void ColourPalleteDisplay::valueTreeChildAdded (ValueTree& parentTree,
+                                                ValueTree& childWhichHasBeenAdded)
+{
+    jassertfalse;
+}
+
+void ColourPalleteDisplay::valueTreeChildRemoved (ValueTree& parentTree,
+                                                  ValueTree& childWhichHasBeenRemoved,
+                                                  int indexFromWhichChildWasRemoved)
+{
+    jassertfalse;
+}
+
+void ColourPalleteDisplay::valueTreeChildOrderChanged (ValueTree& parentTreeWhoseChildrenHaveMoved,
+                                                       int oldIndex,
+                                                       int newIndex)
+{
+    jassertfalse;
+}
+
+void ColourPalleteDisplay::valueTreeParentChanged (ValueTree& treeWhoseParentHasChanged)
+{
+    jassertfalse;
 }
