@@ -15,20 +15,19 @@ class ColourPalleteDisplay: public Component
 {
 public:
     
-    ColourPalleteDisplay()
-    {
-    }
-    
-    ColourPalleteDisplay(const String& colourCode, const String& colourName);
+    ColourPalleteDisplay(ValueTree tree);
     
     void paint (Graphics& g) override;
     
-    void setColourFromHexCodeAndName (const String& newHexCode, const String& colourName);
+    void pickNewColourFromValueTree (int childIndex);
     
 private:
     
+    ValueTree colourCodesAndNames;
+    
     Colour fillColour { Colours::antiquewhite };
     String colourName { "Antique White" };
+    String colourCode { "#faebd7" };
 };
 
 #pragma once

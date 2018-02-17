@@ -37,7 +37,7 @@ private:
         
     ValueTree colourDataFromXML;
     
-    ColourPalleteDisplay colouredSquare;
+    std::unique_ptr<ColourPalleteDisplay> colouredSquare;
     
     TextButton randomiseButton;
     
