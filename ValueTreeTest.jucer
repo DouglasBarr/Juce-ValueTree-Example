@@ -2,10 +2,14 @@
 
 <JUCERPROJECT id="LLIlOE" name="ValueTreeTest" displaySplashScreen="1" reportAppUsage="1"
               splashScreenColour="Dark" projectType="guiapp" version="1.0.0"
-              bundleIdentifier="com.yourcompany.ValueTreeTest" includeBinaryInAppConfig="1"
-              cppLanguageStandard="11" jucerVersion="5.1.1">
+              bundleIdentifier="com.DouglasBarr.ValueTreeTest" includeBinaryInAppConfig="1"
+              cppLanguageStandard="14" jucerVersion="5.1.1">
   <MAINGROUP id="ZRrcJr" name="ValueTreeTest">
     <GROUP id="{58B316E2-C2C0-8188-F25F-7B5DEA6EF261}" name="Source">
+      <FILE id="E6kbYM" name="ColourPalleteDisplay.cpp" compile="1" resource="0"
+            file="Source/ColourPalleteDisplay.cpp"/>
+      <FILE id="yjGLFT" name="ColourPalleteDisplay.h" compile="0" resource="0"
+            file="Source/ColourPalleteDisplay.h"/>
       <FILE id="EAcF3U" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
       <FILE id="mS87R3" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
@@ -18,8 +22,10 @@
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="ValueTreeTest"/>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="ValueTreeTest"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="ValueTreeTest"
+                       cppLibType="libc++"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="ValueTreeTest"
+                       cppLibType="libc++"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_core" path="../../JUCE/modules"/>

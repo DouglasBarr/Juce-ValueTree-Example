@@ -34,7 +34,8 @@ void MainContentComponent::buttonClicked (Button*)
     
     auto child = colourDataFromXML.getChild(currentColour);
     
-    colouredSquare.setColourFromHexCode(child.getPropertyAsValue("ColourCode", nullptr).toString());
+    colouredSquare.setColourFromHexCodeAndName(child.getPropertyAsValue("ColourCode", nullptr).toString(),
+                                               child.getPropertyAsValue("ColourName", nullptr).toString());
     colouredSquare.repaint();
 }
 

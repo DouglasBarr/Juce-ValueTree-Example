@@ -9,41 +9,15 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
-
-class ColouredComponent: public Component
-{
-public:
-    
-    ColouredComponent(): fillColour(Colours::antiquewhite)
-    {
-    }
-    
-    ColouredComponent(const String& colourCode)
-    {
-        setColourFromHexCode(colourCode);
-    }
-    
-    void paint (Graphics& g) override
-    {
-        g.fillAll(fillColour);
-    }
-    
-    void setColourFromHexCode (const String& newHexCode)
-    {
-        fillColour = Colour::fromString(newHexCode);
-    }
-    
-private:
-    
-    Colour fillColour;
-};
+#include "ColourPalleteDisplay.h"
 
 //==============================================================================
 /*
     This component lives inside our window, and this is where you should put all
     your controls and content.
 */
+
+
 class MainContentComponent
 :
 public Component,
@@ -63,7 +37,7 @@ private:
         
     ValueTree colourDataFromXML;
     
-    ColouredComponent colouredSquare;
+    ColourPalleteDisplay colouredSquare;
     
     TextButton randomiseButton;
     
