@@ -7,6 +7,7 @@
 */
 
 #include "MainComponent.h"
+#include "ColourEditor.h"
 
 
 //==============================================================================
@@ -19,9 +20,12 @@ MainContentComponent::MainContentComponent(): randomiseButton("Pick New Colour F
     colouredSquare = std::make_unique<ColourPalleteDisplay>(colourDataFromXML);
     
     addAndMakeVisible(*colouredSquare);
+    
     addAndMakeVisible(randomiseButton);
+    addAndMakeVisible(editColourButton);
     
     randomiseButton.addListener(this);
+    editColourButton.addListener(this);
     
     setSize (600, 400);
 }
@@ -30,12 +34,24 @@ MainContentComponent::~MainContentComponent()
 {
 }
 
-void MainContentComponent::buttonClicked (Button*)
+void MainContentComponent::buttonClicked (Button* b)
 {
-    currentColour = (currentColour + 1) % 4;
+    if (b == &randomiseButton)
+    {
+        currentColour = (currentColour + 1) % 4;
+        
+        colouredSquare->pickNewColourFromValueTree(currentColour);
+        colouredSquare->repaint();
+    }
+    else if (b == &editColourButton)
+    {
+        ColourEditor* colourSelector = new ColourEditor(colourDataFromXML, currentColour);
+        
+        colourSelector->setSize (300, 450);
+        
+        CallOutBox::launchAsynchronously (colourSelector, b->getScreenBounds(), nullptr);
+    }
     
-    colouredSquare->pickNewColourFromValueTree(currentColour);
-    colouredSquare->repaint();
 }
 
 void MainContentComponent::paint (Graphics& g)
@@ -46,6 +62,7 @@ void MainContentComponent::paint (Graphics& g)
 void MainContentComponent::resized()
 {
     randomiseButton.setBounds(50, 100, 130, 70);
+    editColourButton.setBounds(50, 205, 130, 70);
     
     colouredSquare->setBounds(getLocalBounds().removeFromRight(400).withSizeKeepingCentre(250, 250));
 }

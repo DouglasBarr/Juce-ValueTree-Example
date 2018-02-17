@@ -40,6 +40,7 @@ private:
     std::unique_ptr<ColourPalleteDisplay> colouredSquare;
     
     TextButton randomiseButton;
+    TextButton editColourButton { "Edit current colour" };
     
     int currentColour { 0 };
     

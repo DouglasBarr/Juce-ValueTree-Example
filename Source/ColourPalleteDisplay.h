@@ -8,6 +8,8 @@
   ==============================================================================
 */
 
+#pragma once
+
 #include "../JuceLibraryCode/JuceHeader.h"
 
 
@@ -28,6 +30,7 @@ private:
     Colour fillColour { Colours::antiquewhite };
     String colourName { "Antique White" };
     String colourCode { "#faebd7" };
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ColourPalleteDisplay)
 };
 
-#pragma once

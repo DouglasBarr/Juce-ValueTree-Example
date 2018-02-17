@@ -10,6 +10,9 @@
             file="Source/ColourPalleteDisplay.cpp"/>
       <FILE id="yjGLFT" name="ColourPalleteDisplay.h" compile="0" resource="0"
             file="Source/ColourPalleteDisplay.h"/>
+      <FILE id="aQbWTH" name="ColourEditor.cpp" compile="1" resource="0"
+            file="Source/ColourEditor.cpp"/>
+      <FILE id="F4VTuD" name="ColourEditor.h" compile="0" resource="0" file="Source/ColourEditor.h"/>
       <FILE id="EAcF3U" name="MainComponent.cpp" compile="1" resource="0"
             file="Source/MainComponent.cpp"/>
       <FILE id="mS87R3" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
