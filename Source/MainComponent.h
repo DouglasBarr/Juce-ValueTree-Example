@@ -12,8 +12,16 @@
 
 //==============================================================================
 /*
-    This component lives inside our window, and this is where you should put all
-    your controls and content.
+    This is designed to be a quick demo of the ValueTree handling inside Juce.
+ 
+    There is a short XML file with four colour values which gets loaded in as a ValueTree and then passed around
+    the other components. 
+ 
+    One of the components makes changes to the ValueTree internally (the ColourEditor), and the other is a 
+    ValueTree::Listener which gets updated when a change is made.
+ 
+    The ValueTree colourDataFromXML looks like it gets passed around by value, but it's operator= is overriden so
+    that the new ValueTree points at the node that is passed in.
 */
 
 class ColourPalleteDisplay;

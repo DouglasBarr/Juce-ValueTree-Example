@@ -50,13 +50,14 @@ void ColourPalleteDisplay::pickNewColourFromValueTree (int childIndex)
     colourCode = "#" + fullColourCode.substring(4);
     
     fillColour = Colour::fromString(fullColourCode);
+    
+    repaint();
 }
 
 void ColourPalleteDisplay::valueTreePropertyChanged (ValueTree& treeWhosePropertyHasChanged,
                                                      const Identifier& property)
 {
     pickNewColourFromValueTree(colourCodesAndNames.indexOf(treeWhosePropertyHasChanged));
-    repaint();
 }
 
 void ColourPalleteDisplay::valueTreeChildAdded (ValueTree& parentTree,
