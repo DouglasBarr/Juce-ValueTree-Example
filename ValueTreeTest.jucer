@@ -6,6 +6,8 @@
               cppLanguageStandard="14" jucerVersion="5.1.1">
   <MAINGROUP id="ZRrcJr" name="ValueTreeTest">
     <GROUP id="{58B316E2-C2C0-8188-F25F-7B5DEA6EF261}" name="Source">
+      <FILE id="yEv7RF" name="ColourEntryIdentifiers.h" compile="0" resource="0"
+            file="Source/ColourEntryIdentifiers.h"/>
       <FILE id="E6kbYM" name="ColourPalleteDisplay.cpp" compile="1" resource="0"
             file="Source/ColourPalleteDisplay.cpp"/>
       <FILE id="yjGLFT" name="ColourPalleteDisplay.h" compile="0" resource="0"

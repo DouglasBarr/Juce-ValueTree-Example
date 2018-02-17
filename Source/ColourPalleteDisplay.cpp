@@ -9,6 +9,7 @@
 */
 
 #include "ColourPalleteDisplay.h"
+#include "ColourEntryIdentifiers.h"
 
 
 ColourPalleteDisplay::ColourPalleteDisplay (ValueTree tree): colourCodesAndNames(tree)
@@ -43,9 +44,9 @@ void ColourPalleteDisplay::pickNewColourFromValueTree (int childIndex)
         return;
     }
     
-    colourName = child.getPropertyAsValue("ColourName", nullptr).toString();
+    colourName = child.getPropertyAsValue(ColourEntryIds::ColourName, nullptr).toString();
     
-    const auto fullColourCode = child.getPropertyAsValue("ColourCode", nullptr).toString();
+    const auto fullColourCode = child.getPropertyAsValue(ColourEntryIds::ColourCode, nullptr).toString();
     
     colourCode = "#" + fullColourCode.substring(4);
     

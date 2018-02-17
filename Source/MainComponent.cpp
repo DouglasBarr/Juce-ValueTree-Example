@@ -11,7 +11,7 @@
 #include "ColourEditor.h"
 
 //==============================================================================
-MainContentComponent::MainContentComponent(): randomiseButton("Pick New Colour From ValueTree")
+MainContentComponent::MainContentComponent(): randomiseButton("Go to next Colour Entry in the ValueTree")
 {
     // The XML file has been added to the Binary using the Projucer BinaryBuilder, to make this example a bit
     // more portable.
@@ -74,8 +74,8 @@ void MainContentComponent::resized()
 {
     colourValueEditor->setBounds(getLocalBounds());
     
-    randomiseButton.setBounds(50, 100, 130, 70);
-    editColourButton.setBounds(50, 205, 130, 70);
+    randomiseButton.setBounds(50, 100, 160, 70);
+    editColourButton.setBounds(50, 205, 160, 70);
     
     colouredSquare->setBounds(getLocalBounds().removeFromRight(400).withSizeKeepingCentre(250, 250));
 }

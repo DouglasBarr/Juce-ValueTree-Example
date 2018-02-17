@@ -9,7 +9,7 @@
 */
 
 #include "ColourEditor.h"
-
+#include "ColourEntryIdentifiers.h"
 
 ColourEditor::ColourEditor (ValueTree tree)
 :
@@ -45,8 +45,8 @@ void ColourEditor::showEditorForColourEntry (int index)
     if (!colourEntry.isValid())
         return;
     
-    colourName  = colourEntry.getPropertyAsValue("ColourName", nullptr).toString();
-    colourCode  = colourEntry.getPropertyAsValue("ColourCode", nullptr).toString();
+    colourName  = colourEntry.getPropertyAsValue(ColourEntryIds::ColourName, nullptr).toString();
+    colourCode  = colourEntry.getPropertyAsValue(ColourEntryIds::ColourCode, nullptr).toString();
     
     fillColour = Colour::fromString(colourCode);
     
@@ -82,9 +82,9 @@ void ColourEditor::buttonClicked (Button* b)
         colourName = colourNameInput.getText();
         
         if (colourName.isNotEmpty())
-            colourEntryToEdit.setProperty("ColourName", colourName, nullptr);
+            colourEntryToEdit.setProperty(ColourEntryIds::ColourName, colourName, nullptr);
         
-        colourEntryToEdit.setProperty("ColourCode", "0x" + colourCode, nullptr);
+        colourEntryToEdit.setProperty(ColourEntryIds::ColourCode, "0x" + colourCode, nullptr);
     }
     
     dismissColourEditor(); // triggered on successful colour value editing or when the cancel button is pressed
