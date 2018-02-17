@@ -10,28 +10,42 @@
 
 
 //==============================================================================
-MainContentComponent::MainContentComponent()
+MainContentComponent::MainContentComponent(): randomiseButton("Pick New Colour From ValueTree")
 {
     setSize (600, 400);
+    
+    const XmlElement demoData = *XmlDocument::parse (BinaryData::demo_data_xml);
+    
+    colourDataFromXML = ValueTree::fromXml(demoData);
+    
+    addAndMakeVisible(colouredSquare);
+    addAndMakeVisible(randomiseButton);
+    
+    randomiseButton.addListener(this);
 }
 
 MainContentComponent::~MainContentComponent()
 {
 }
 
+void MainContentComponent::buttonClicked (Button*)
+{
+    currentColour = (currentColour + 1) % 4;
+    
+    auto child = colourDataFromXML.getChild(currentColour);
+    
+    colouredSquare.setColourFromHexCode(child.getPropertyAsValue("ColourCode", nullptr).toString());
+    colouredSquare.repaint();
+}
+
 void MainContentComponent::paint (Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
-
-    g.setFont (Font (16.0f));
-    g.setColour (Colours::white);
-    g.drawText ("Hello World!", getLocalBounds(), Justification::centred, true);
 }
 
 void MainContentComponent::resized()
 {
-    // This is called when the MainContentComponent is resized.
-    // If you add any child components, this is where you should
-    // update their positions.
+    randomiseButton.setBounds(50, 100, 130, 70);
+    
+    colouredSquare.setBounds(getLocalBounds().removeFromRight(400).withSizeKeepingCentre(250, 250));
 }

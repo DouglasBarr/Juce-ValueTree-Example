@@ -11,6 +11,9 @@
       <FILE id="mS87R3" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
       <FILE id="vfRyah" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
     </GROUP>
+    <GROUP id="{C78A8F49-BFFD-41D3-29C5-6DC200766ECA}" name="Resources">
+      <FILE id="HknOoU" name="demo data.xml" compile="0" resource="1" file="Resources/demo data.xml"/>
+    </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">
