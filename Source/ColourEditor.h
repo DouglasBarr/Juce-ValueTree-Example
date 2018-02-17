@@ -21,7 +21,7 @@ public TextButton::Listener
 {
 public:
     
-    ColourEditor(ValueTree tree, int currentColourCode);
+    ColourEditor(ValueTree tree);
     
     void paint (Graphics& g) override;
     
@@ -30,21 +30,12 @@ public:
     void changeListenerCallback (ChangeBroadcaster* source) override;
     void buttonClicked (Button* b) override;
     
-    class JUCE_API Listener
-    {
-    public:
-        virtual ~Listener()  {}
-        virtual void valueTreeSuccessfullyUpdated () = 0;
-    };
-    
-    void addListener (Listener* newListener)    { listeners.add(newListener); }
-    void removeListener (Listener* listener)    { listeners.remove(listener); }
+    void showEditorForColourEntry (int index);
+    void dismissColourEditor ();
     
 private:
     
-    ListenerList<Listener> listeners;
-    
-    const int valueTreeEntryActiveOnOpen;
+    int valueTreeEntryActiveOnOpen { 0 };
     
     ValueTree colourCodesAndNames;
     

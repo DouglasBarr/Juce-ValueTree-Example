@@ -11,9 +11,8 @@
 #include "ColourEditor.h"
 
 
-ColourEditor::ColourEditor (ValueTree tree, int currentColourSelected)
+ColourEditor::ColourEditor (ValueTree tree)
 :
-valueTreeEntryActiveOnOpen(currentColourSelected),
 colourCodesAndNames(tree)
 {
     colourSelector.setName ("background");
@@ -26,13 +25,38 @@ colourCodesAndNames(tree)
     
     addAndMakeVisible(colourSelector);
     
-    colourNameInput.setTextToShowWhenEmpty("Antique White", Colours::dimgrey.withMultipliedBrightness(1.2f));
+    colourNameInput.setTextToShowWhenEmpty("Antique White", Colours::white.withMultipliedBrightness(0.95f));
     
     addAndMakeVisible(colourNameInput);
     
     submitButton.addListener(this);
     
     addAndMakeVisible(submitButton);
+}
+
+void ColourEditor::showEditorForColourEntry (int index)
+{
+    valueTreeEntryActiveOnOpen = index;
+    
+    auto colourEntry = colourCodesAndNames.getChild(valueTreeEntryActiveOnOpen);
+    
+    if (!colourEntry.isValid())
+        return;
+    
+    colourName  = colourEntry.getPropertyAsValue("ColourName", nullptr).toString();
+    colourCode  = colourEntry.getPropertyAsValue("ColourCode", nullptr).toString();
+    
+    fillColour = Colour::fromString(colourCode);
+    
+    colourSelector.setCurrentColour(fillColour);
+    colourNameInput.setTextToShowWhenEmpty(colourName, Colours::white.withMultipliedBrightness(0.95f));
+    
+    setVisible(true);
+}
+
+void ColourEditor::dismissColourEditor ()
+{
+    setVisible(false);
 }
 
 void ColourEditor::changeListenerCallback (ChangeBroadcaster* source)
@@ -58,16 +82,21 @@ void ColourEditor::buttonClicked (Button* b)
     
     colourEntryToEdit.setProperty("ColourCode", "0x" + colourCode, nullptr);
     colourEntryToEdit.setProperty("ColourName", colourName, nullptr);
+    
+    setVisible(false);
 }
 
 void ColourEditor::paint (Graphics& g)
 {
-    g.fillAll(Colours::black);
+    g.fillAll(Colours::black.withAlpha(0.5f));
+    
+    g.setColour(getLookAndFeel().findColour (ResizableWindow::backgroundColourId));
+    g.fillRect(getLocalBounds().withSizeKeepingCentre(320, 420));
 }
 
 void  ColourEditor::resized()
 {
-    auto bounds = getLocalBounds();
+    auto bounds = getLocalBounds().withSizeKeepingCentre(300, 400);
     
     auto bottomBar = bounds.removeFromBottom(bounds.proportionOfHeight(0.2f));
     

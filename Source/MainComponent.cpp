@@ -7,8 +7,8 @@
 */
 
 #include "MainComponent.h"
+#include "ColourPalleteDisplay.h"
 #include "ColourEditor.h"
-
 
 //==============================================================================
 MainContentComponent::MainContentComponent(): randomiseButton("Pick New Colour From ValueTree")
@@ -18,8 +18,11 @@ MainContentComponent::MainContentComponent(): randomiseButton("Pick New Colour F
     colourDataFromXML = ValueTree::fromXml(demoData);
     
     colouredSquare = std::make_unique<ColourPalleteDisplay>(colourDataFromXML);
+    colourValueEditor = std::make_unique<ColourEditor>(colourDataFromXML);
     
     addAndMakeVisible(*colouredSquare);
+    
+    addChildComponent(*colourValueEditor);
     
     addAndMakeVisible(randomiseButton);
     addAndMakeVisible(editColourButton);
@@ -44,12 +47,9 @@ void MainContentComponent::buttonClicked (Button* b)
         colouredSquare->repaint();
     }
     else if (b == &editColourButton)
-    {
-        ColourEditor* colourSelector = new ColourEditor(colourDataFromXML, currentColour);
-        
-        colourSelector->setSize (300, 450);
-        
-        CallOutBox::launchAsynchronously (colourSelector, b->getScreenBounds(), nullptr);
+    {   
+        colourValueEditor->toFront(false);
+        colourValueEditor->showEditorForColourEntry(currentColour);
     }
     
 }
@@ -61,6 +61,8 @@ void MainContentComponent::paint (Graphics& g)
 
 void MainContentComponent::resized()
 {
+    colourValueEditor->setBounds(getLocalBounds());
+    
     randomiseButton.setBounds(50, 100, 130, 70);
     editColourButton.setBounds(50, 205, 130, 70);
     

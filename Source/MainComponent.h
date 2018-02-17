@@ -9,7 +9,6 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "ColourPalleteDisplay.h"
 
 //==============================================================================
 /*
@@ -17,6 +16,8 @@
     your controls and content.
 */
 
+class ColourPalleteDisplay;
+class ColourEditor;
 
 class MainContentComponent
 :
@@ -38,6 +39,7 @@ private:
     ValueTree colourDataFromXML;
     
     std::unique_ptr<ColourPalleteDisplay> colouredSquare;
+    std::unique_ptr<ColourEditor> colourValueEditor;
     
     TextButton randomiseButton;
     TextButton editColourButton { "Edit current colour" };
